@@ -1,1 +1,2 @@
+主要專案為_vite_project
 飯店資料完全寫在pinia，與資料庫無關
