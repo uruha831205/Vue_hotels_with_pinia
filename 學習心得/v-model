@@ -1,0 +1,27 @@
+v-model : 適用於 <input> 、 <select> 和 <textarea> 輸入向，輸入項一有改變就即時更新
+*可使用方法:
+1 .lazy : 當輸入框不是focus狀態才會更新
+2 .number : 只允許輸入是數字才會更新，若開頭是0不會顯示
+3 .trim : 自動去空白
+
+
+-要加入的父層:
+    匯入該元件 import MyComponent from "./components/MyComponent.vue";
+    在 import 後面的 MyComponent 可自訂名稱，但建議和檔名一樣才不會搞混
+
+    const 變數名稱 = ref();
+
+    <MyComponent v-model="變數名稱" />
+    <div>{{ 變數名稱 }}</div>
+
+-自創 component 內有 v-model:
+    <script> 內加入 const 變數名稱 = defineModel();
+    若要給預設值 => const 變數名稱 = defineModel({defalut: 值});
+    <template> 內的元件:
+    <input type="text" v-model="變數名稱" />
+
+!!補充:因為 defineModel() 的回傳值是一個 ref()，所以有要對該值做處理方法和 ref()一樣!!
+
+自己理解的執行流程 : '在原檔的自創 component 的v-model變數' 透過 defineModel() 傳遞給 '掛在父層的自創 component 的v-model變數'
+###############
+

@@ -1,0 +1,25 @@
+ref() : 適合宣告單一變數(群體變數也可)，可宣告變數型態多樣化: int、string、boolean...
+
+*非群體變數宣告 : 
+const a_number = ref(0)
+const a_string = ref('string')
+
+賦予值方法: 
+a_number.value = 50
+a_string.value = 'nothing'
+
+
+**群體變數宣告 : 
+const a_list = ref([1,2,3,'asd'])
+const a_object = ref({
+    'item1': 1,
+    'item2': 2,
+    'item3': "3",
+})
+
+賦予值方法: 
+a_list.value[0] = 5
+a_list.value[3] = "zxc"
+
+a_object.value.item1 = 50
+a_object.value.item2 = "4"

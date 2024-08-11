@@ -1,0 +1,2 @@
+          color: 'yellow',
+          backgroundImage: `url('${圖片變數}')`,

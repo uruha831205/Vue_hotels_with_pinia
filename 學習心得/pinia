@@ -1,0 +1,64 @@
+全域性(多個.Vue 或 components)共用資料
+
+通常主檔名開頭會使用 use
+
+宣告方式:
+import {defineStore} from "pinia"
+import { computed, ref } from "vue"
+
+export const useDataStore = defineStore("DataStore", () => {
+
+    //state
+    const data = ref(0);
+
+    //getter
+    const dataTransform = computed((oldData) => {
+        console.log("oldData: ",oldData);
+        return data.value * 2;
+    });
+
+    //action
+    const dataAdd = () => {
+        data.value++;
+    }
+
+    return {
+        data,
+        dataTransform,
+        dataAdd
+    }
+})
+
+**main.js必須加入
+import { createApp } from 'vue'
+import { createPinia } from "pinia" <== pinia相關
+import App from './App.vue'
+
+const app = createApp(App)
+const pinia = createPinia() <== pinia相關 
+
+app.use(pinia)
+
+**匯入進 指定 .Vue檔 內:
+
+<script setup>
+import { useDataStore } from "./stores/useDataStore.js";
+
+const store = useDataStore();
+const { dataTransform } = storeToRefs(store);
+</script>
+////////////////////////////////////////////////////////////////////////
+這邊拿我自創的component作範例
+檔案 : UseData1.vue
+
+<script setup>
+import { useDataStore } from "../stores/useDataStore.js";
+import { storeToRefs } from "pinia";
+
+const Store = useDataStore();
+const { data, dataTransform } = storeToRefs(Store); <== 將值轉成ref()，因為值傳遞過程中被轉換成proxy
+</script>
+<template>
+  <button @click="Store.dataAdd">now data: {{ data }}</button>
+</template>
+<style></style>

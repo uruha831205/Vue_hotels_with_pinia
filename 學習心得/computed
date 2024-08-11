@@ -1,0 +1,41 @@
+computed() : 若內部使用的變數有即時更新，會針對更新的狀況做即時回應
+***執行機制 : 若值並沒有被改變就不會觸發
+
+宣告方式 1: 單純更新即時回應
+<script>
+const number = ref(0)
+
+const showsomething = computed(() => {
+    if (number > 5){
+        return 'OMG!! > 5'
+    }
+    else{
+        return "Um... < 5"
+    }
+})
+</script>
+<template>
+{{showsomething}}  <== 會針對更新的狀況做即時回應，也是更新 showsomething 變數
+</template>
+
+
+宣告方式 2: 除了更新即時回應，還可監看過往資料
+<script setup>
+const a1 = ref(0);
+const wishName = ref("");
+
+const listenchange = computed((oldData) => {  <== 多一個參數，利用computed的緩存機制取資料，但是此參數不可運算!!
+  console.log("data change!!");
+  console.log(oldData);
+  return a1.value; <== 更新 listenchange 變數
+});
+
+const click2change = () => {
+  a1.value = wishName.value; <= 若二個值不一樣，computed觸發，反之不觸發
+};
+</script>
+<template>
+<input type="text" v-model="wishName" />
+<button @click="click2change">click2change</button>
+<div>{{ listenchange }}</div>
+</template>

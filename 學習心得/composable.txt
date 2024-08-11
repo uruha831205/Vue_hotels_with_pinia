@@ -1,0 +1,31 @@
+區域性(單一.Vue 或 component)共用資料
+
+通常主檔名開頭會使用 use
+
+宣告方式: 
+import { ref } from "vue";
+import {defineStore} from "pinia"
+
+export function useSetData(val) {
+    const data = ref(val)
+
+    const setdata = (change) => {
+        data.value = change;
+    }
+
+    const resetnumber = () => {
+        data.value = 0;
+    }
+
+    return {data,
+            setdata,
+            resetnumber,
+            }
+}
+
+匯入進 指定 .Vue檔 內:
+
+<script setup>
+import { useSetData } from "路徑";
+const { data, setdata, resetnumber } = useSetData();
+</script>

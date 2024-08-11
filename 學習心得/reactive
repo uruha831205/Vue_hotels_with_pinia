@@ -1,0 +1,15 @@
+// reactive() : 只能宣告提體變數，例:串列和object(類似python 的 dict)
+
+const a_list = reactive([1,2,'5'])
+const a_object = reactive({
+    'item1': 1,
+    'item2': 2,
+    'item3': "3",
+})
+
+賦予值方法:
+a_list[0] = 55
+a_list[1] = 50
+
+a_object.item1 = 52
+a_object.item3 = '5555'

@@ -1,0 +1,18 @@
+
+此參數各屬於元件的內建參數
+:key 的必要性
+
+<script>
+    const items = reactive([{id:1, message:"m1"}, {id:2, message:"m2"}])
+</script>
+
+<template>
+    <div v-for="item in items" :key="item.id">
+        <input type="text" placeholder="input something!"/>
+    </div>
+</template>
+
+若今天有要求 items 做反轉功能 : 
+
+有設定 :key 值的效果 => <div> 內的 <input> '會'隨著 item 順序移動!!
+沒有設定 :key 值的效果 => <div> 內的 <input> '不會'隨著 item 順序移動!!
